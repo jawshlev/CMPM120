@@ -7,152 +7,151 @@
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.js" integrity="sha512-H05oT7BAjM9Ai1IaFX9zr61NtE2e1P0MkTz3AZXBnseaJSAOt2FGMFJ+vVGutaJxEGA1jxUiYsTBYQNE08/Erw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-    class PreTitle extends Phaser.Scene {
-        constructor() {
-            super({key: 'pretitle'});
-        }
-        preload()
-        {
-            this.load.image('pre', 'PreTitle.png');
-            this.load.audio('theme', 'theme.wav');
-            this.load.audio('lol', 'lol.wav');
-        }
-        create() {
-            this.cameras.main.fadeIn(1500);
-
-            let l = this.add.sprite(640,400, 'pre');
-            l.scale = 0.75;
-
-            let thm = this.sound.add('theme');
-            let rofl = this.sound.add('lol');
-
-            thm.play();
-            rofl.play();
-
-            this.input.once('pointerdown', function (event){
-                console.log('From preTitle to intro');
-                this.scene.start('intro');
-            }, this);
-        }
+        class PreTitle extends Phaser.Scene {
+    constructor() {
+        super({key: 'pretitle'});
     }
-
-    class Intro extends Phaser.Scene {
-        constructor() {
-            super({key: 'intro'});
-        }
-        preload()
-        {
-            this.load.image('logo', 'LOGO.jpg');
-            this.load.image('studio', 'stdioname.png')
-        }
-        create() {
-            this.cameras.main.fadeIn(1500);
-
-            let l = this.add.sprite(640,400, 'logo');
-            let std = this.add.sprite(-1000, 650, 'studio');
-
-            l.scale = 0.75;
-            this.tweens.add({
-                targets: std,
-                x: 640,
-                duration: 2000,
-                repeat: 0,
-                hold: 500,
-                ease: 'cubic.in'
-            })
-
-            this.input.once('pointerdown', function (event){
-                console.log('From intro to loading');
-                this.scene.start('loading');
-            }, this);
-        }
+    preload()
+    {
+        this.load.image('pre', 'PreTitle.png');
+        this.load.audio('theme', 'theme.wav');
+        this.load.audio('lol', 'lol.wav');
     }
+    create() {
+        this.cameras.main.fadeIn(1500);
 
-    class Loading extends Phaser.Scene {
-        constructor() {
-            super({key: 'loading'});
-        }
-        preload()
-        {
-            this.load.image('loadscreen', 'LoadingScreen0.jpg');
-        }
-        create() {
-            this.cameras.main.fadeIn(1500);
-            let load = this.add.sprite(640,400, 'loadscreen');
-            load.scale = 0.75;
-            const c1 = this.add.circle(630, 30, 15, 0x9966ff);
-            const c2 = this.add.circle(570, 30, 15, 0x9966ff);
-            const c3 = this.add.circle(510, 30, 15, 0x9966ff);
-            this.tweens.add({
-                delay: 1000,
-                targets: c1,
-                alpha: 0.2,
-                yoyo: true,
-                repeat: -1,
-                repeatDelay: 500,
-                ease: 'Sine.easeInOut'
-            });
-            this.tweens.add({
-                delay: 3000,
-                targets: c2,
-                alpha: 0.2,
-                yoyo: true,
-                repeat: -1,
-                repeatDelay: 1000,
-                ease: 'Sine.easeInOut'
-            });
-            this.tweens.add({
-                delay: 5000,
-                targets: c3,
-                alpha: 0.2,
-                yoyo: true,
-                repeat: -1,
-                repeatDelay: 1500,
-                ease: 'Sine.easeInOut'
-            });
-            this.input.once('pointerdown', function (event){
-                console.log('From Loading to Title');
-                this.scene.start('title');
-            }, this);
-        }
+        let l = this.add.sprite(640,400, 'pre');
+        l.scale = 0.75;
+
+        let thm = this.sound.add('theme');
+        let rofl = this.sound.add('lol');
+
+        thm.play();
+        rofl.play();
+
+        this.input.once('pointerdown', function (event){
+            console.log('From preTitle to intro');
+            this.scene.start('intro');
+        }, this);
     }
+}
 
-    class Title extends Phaser.Scene {
-        constructor(){
-            super({key: 'title'});
-        }
-        preload()
-        {
-            this.load.image('titlescreen', 'visual kei.jpg');
-            this.load.image('titletext', 'TitleScreenText.png');
+class Intro extends Phaser.Scene {
+    constructor() {
+        super({key: 'intro'});
+    }
+    preload()
+    {
+        this.load.image('logo', 'LOGO.jpg');
+        this.load.image('studio', 'stdioname.png')
+    }
+    create() {
+        this.cameras.main.fadeIn(1500);
 
-            this.load.audio('theme', 'theme.wav');
-            this.load.audio('lol', 'lol.wav');
-        }
-        create() {
-            this.cameras.main.fadeIn(1500);
-            let t = this.add.sprite(640,400, 'titlescreen');
-            let tt = this.add.sprite(930, 200, 'titletext');
-            let tex = this.add.text(565, 0, 'Drip Hunter\nThe legendary quest\n for your dream grail', {color: '000000', fontSize: '30px'});
-            t.scale = 0.75;
-            tt.scale = 0.65;
-            this.input.once('pointerdown', function(event) {
-                
-                console.log('From Title to Intro');
-                this.scene.start('intro');
-            }, this);
+        let l = this.add.sprite(640,400, 'logo');
+        let std = this.add.sprite(-1000, 650, 'studio');
+
+        l.scale = 0.75;
+        this.tweens.add({
+            targets: std,
+            x: 640,
+            duration: 2000,
+            repeat: 0,
+            hold: 500,
+            ease: 'cubic.in'
+        })
+
+        this.input.once('pointerdown', function (event){
+            console.log('From intro to loading');
+            this.scene.start('loading');
+        }, this);
+    }
+}
+
+class Loading extends Phaser.Scene {
+    constructor() {
+        super({key: 'loading'});
+    }
+    preload()
+    {
+        this.load.image('loadscreen', 'LoadingScreen0.jpg');
+    }
+    create() {
+        this.cameras.main.fadeIn(1500);
+        let load = this.add.sprite(640,400, 'loadscreen');
+        load.scale = 0.75;
+        const c1 = this.add.circle(630, 30, 15, 0x9966ff);
+        const c2 = this.add.circle(570, 30, 15, 0x9966ff);
+        const c3 = this.add.circle(510, 30, 15, 0x9966ff);
+        this.tweens.add({
+            delay: 1000,
+            targets: c1,
+            alpha: 0.2,
+            yoyo: true,
+            repeat: -1,
+            repeatDelay: 500,
+            ease: 'Sine.easeInOut'
+        });
+        this.tweens.add({
+            delay: 3000,
+            targets: c2,
+            alpha: 0.2,
+            yoyo: true,
+            repeat: -1,
+            repeatDelay: 1000,
+            ease: 'Sine.easeInOut'
+        });
+        this.tweens.add({
+            delay: 5000,
+            targets: c3,
+            alpha: 0.2,
+            yoyo: true,
+            repeat: -1,
+            repeatDelay: 1500,
+            ease: 'Sine.easeInOut'
+        });
+        this.input.once('pointerdown', function (event){
+            console.log('From Loading to Title');
+            this.scene.start('title');
+        }, this);
+    }
+}
+
+class Title extends Phaser.Scene {
+    constructor(){
+        super({key: 'title'});
+    }
+    preload()
+    {
+        this.load.image('titlescreen', 'visual kei.jpg');
+        this.load.image('titletext', 'TitleScreenText.png');
+
+        this.load.audio('theme', 'theme.wav');
+        this.load.audio('lol', 'lol.wav');
+    }
+    create() {
+        this.cameras.main.fadeIn(1500);
+        let t = this.add.sprite(640,400, 'titlescreen');
+        let tt = this.add.sprite(930, 200, 'titletext');
+        let tex = this.add.text(565, 0, 'Drip Hunter\nThe legendary quest\n for your dream grail', {color: '000000', fontSize: '30px'});
+        t.scale = 0.75;
+        tt.scale = 0.65;
+        this.input.once('pointerdown', function(event) {
             
-        }
+            console.log('From Title to Intro');
+            this.scene.start('intro');
+        }, this);
+        
     }
+}
    
-    new Phaser.Game({
-        width: 1280,
-        height: 960,
-        scene: [PreTitle, Intro, Loading, Title],
-    })
+new Phaser.Game({
+    width: 1280,
+    height: 960,
+    scene: [PreTitle, Intro, Loading, Title],
+})
 
-    const game = new Phaser.Game(config);
-
+const game = new Phaser.Game(config);
     </script>
 </head>
 <body>
